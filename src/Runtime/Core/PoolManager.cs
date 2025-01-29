@@ -70,6 +70,7 @@ namespace Racer.EzPooler.Core
                 poolObj.gameObject.SetActive(false);
 
             _queue.Enqueue(poolObj);
+            _currentObjectsCount++;
         }
 
         /// <summary>
@@ -97,7 +98,7 @@ namespace Racer.EzPooler.Core
         /// <returns>The spawned pool object.</returns>
         public PoolObject SpawnObject(Vector3 position, Quaternion rotation)
         {
-            if (_queue.Count <= 0)
+            if (_queue.Count == 0)
             {
                 if (autoGrow && _currentObjectsCount >= capacity)
                 {
@@ -123,7 +124,6 @@ namespace Racer.EzPooler.Core
 
             poolObj.transform.SetPositionAndRotation(position, rotation);
             poolObj.gameObject.SetActive(true);
-            _currentObjectsCount++;
 
             return poolObj;
         }
