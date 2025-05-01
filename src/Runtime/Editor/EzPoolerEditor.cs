@@ -7,7 +7,7 @@ using UnityEditor.PackageManager.Requests;
 
 namespace Racer.EzPooler.Editor
 {
-    internal class EzPoolerEditor : UnityEditor.Editor
+    internal abstract class EzPoolerEditor
     {
         private const string ContextMenuPath = "Racer/EzPooler/";
         private const string SamplesPath = "Assets/Samples/EzPooler";

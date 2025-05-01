@@ -3,7 +3,7 @@
 
 **EzPooler** is a Unity package that provides an efficient way to manage object pooling in your game.
 
- [Read Docs](https://ebukaracer.github.io/EzPooler)
+ [View in DocFx](https://ebukaracer.github.io/EzPooler)
  
 ## Features  
 - Efficient object pooling to improve performance.  
@@ -41,9 +41,9 @@ public class ExampleUsage : MonoBehaviour
 ```
 
 ## Samples and Best Practices
-Check out this package's sample scene by importing it from the package manager *sample's tab* and exploring the scripts for the recommended approach for pooling gameobjects in your game.
+Optionally import this package's demo from the package manager's `Samples` tab.
 
-*To remove this package completely(leaving no trace), navigate to: `Racer > EzPooler > Remove package`*
+To remove this package completely(leaving no trace), navigate to: `Racer > EzPooler > Remove package`
 
 ## [Contributing](https://ebukaracer.github.io/ebukaracer/md/CONTRIBUTING.html) 
 Contributions are welcome! Please open an issue or submit a pull request.
