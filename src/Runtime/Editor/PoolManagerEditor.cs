@@ -1,6 +1,5 @@
 #if UNITY_EDITOR
 using Racer.EzPooler.Core;
-using Racer.EzPooler.Utilities;
 using UnityEditor;
 using UnityEngine;
 
@@ -23,6 +22,7 @@ namespace Racer.EzPooler.Editor
         public override void OnInspectorGUI()
         {
             DrawDefaultInspector();
+            serializedObject.Update();
 
             _poolManager = (PoolManager)target;
 
@@ -31,8 +31,9 @@ namespace Racer.EzPooler.Editor
             ResolveInvalidReference();
 
             if (GUILayout.Button(new GUIContent("Pre-Instantiate Objects",
-                    tooltip: "Prepares the pool with the specified amount of objects that will be used at runtime." +
-                             "\nLeaving empty will result to spawning the objects dynamically during play.")))
+                    tooltip:
+                    "Prepares the pool with the specified amount(capacity) of objects that will be used at runtime." +
+                    "\nLeaving empty will result to spawning the objects dynamically during play.")))
             {
                 ClearPool();
                 InstantiatePoolObjects();
@@ -42,27 +43,28 @@ namespace Racer.EzPooler.Editor
                     tooltip: "Clears the pre-instantiated objects.")))
             {
                 ClearPool();
-                EditorUtility.SetDirty(_poolManager);
             }
+
+            serializedObject.ApplyModifiedProperties();
         }
 
         private void InstantiatePoolObjects()
         {
+            var prefab = _poolObjectPrefab.objectReferenceValue;
+
+            if (!prefab)
+            {
+                Debug.LogError("Prefab field is null. Please assign a valid prefab.", this);
+                return;
+            }
+
             for (var i = 0; i < _capacity.intValue; i++)
             {
-                var prefab = _poolObjectPrefab.objectReferenceValue;
-
-                if (!prefab)
-                {
-                    EzLogger.Error("Prefab field is null. Please assign a valid prefab.", this);
-                    break;
-                }
-
                 var poolObj = PrefabUtility.InstantiatePrefab(prefab, _poolManager.transform) as PoolObject;
 
                 if (!poolObj)
                 {
-                    EzLogger.Warn(
+                    Debug.LogWarning(
                         $"[{poolObj}] does not contain [{nameof(PoolObject)} Component], either add it or inherit from it.",
                         poolObj);
                     continue;
@@ -71,8 +73,6 @@ namespace Racer.EzPooler.Editor
                 poolObj.gameObject.SetActive(false);
                 _poolManager.CachedObjects.Add(poolObj);
             }
-
-            EditorUtility.SetDirty(_poolManager);
         }
 
         private void ResolveInvalidReference()

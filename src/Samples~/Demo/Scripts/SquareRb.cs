@@ -7,6 +7,7 @@ namespace Racer.EzPooler.Samples
     {
         private Rigidbody2D _rb2D;
 
+        
         private void Awake()
         {
             _rb2D = GetComponent<Rigidbody2D>();
@@ -14,7 +15,11 @@ namespace Racer.EzPooler.Samples
 
         private void OnEnable()
         {
+#if UNITY_6000_0_OR_NEWER
+            _rb2D.linearVelocity = Vector2.up * 3f;
+#else
             _rb2D.velocity = Vector2.up * 3f;
+#endif
         }
 
         private void Update()
@@ -26,7 +31,12 @@ namespace Racer.EzPooler.Samples
         public override void Despawn()
         {
             base.Despawn();
+
+#if UNITY_6000_0_OR_NEWER
+            _rb2D.linearVelocity = Vector2.zero;
+#else
             _rb2D.velocity = Vector2.zero;
+#endif
         }
     }
 }

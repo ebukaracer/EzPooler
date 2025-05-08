@@ -1,9 +1,9 @@
 #if UNITY_EDITOR
 using System.IO;
-using Racer.EzPooler.Utilities;
 using UnityEditor;
 using UnityEditor.PackageManager;
 using UnityEditor.PackageManager.Requests;
+using UnityEngine;
 
 namespace Racer.EzPooler.Editor
 {
@@ -37,7 +37,7 @@ namespace Racer.EzPooler.Editor
                     break;
                 }
                 case >= StatusCode.Failure:
-                    EzLogger.Warn($"Failed to remove package: '{PkgId}'\n{_removeRequest.Error.message}");
+                    Debug.LogError($"Failed to remove package: '{PkgId}'\n{_removeRequest.Error.message}");
                     break;
             }
 
@@ -65,5 +65,5 @@ namespace Racer.EzPooler.Editor
                 File.Delete(metaFile);
         }
     }
-#endif
 }
+#endif

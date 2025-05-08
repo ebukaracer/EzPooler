@@ -1,7 +1,7 @@
 {
   "name": "com.racer.ezpooler",
   "displayName": "EzPooler",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "unity": "2020.3",
   "description": "Provides an efficient way to manage object pooling in your game.",
   "documentationUrl": "https://ebukaracer.github.io/EzPooler",

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Racer.EzPooler.Utilities;
 using UnityEngine;
 
 namespace Racer.EzPooler.Core
@@ -49,16 +48,17 @@ namespace Racer.EzPooler.Core
             {
                 poolObj.PoolManager = this;
                 _queue.Enqueue(poolObj);
+                _currentObjectsCount++;
             }
         }
 
-        private void AutoGrowQueue()
+        private void GrowQueue()
         {
             var poolObj = Instantiate(poolObjectPrefab, transform);
 
             if (!poolObj)
             {
-                EzLogger.Warn(
+                Debug.LogWarning(
                     $"[{poolObj}] does not contain [{nameof(PoolObject)} Component], either add or inherit from it.",
                     poolObj);
                 return;
@@ -102,16 +102,16 @@ namespace Racer.EzPooler.Core
             {
                 if (autoGrow && _currentObjectsCount >= capacity)
                 {
-                    AutoGrowQueue();
+                    GrowQueue();
                     capacity++;
                 }
                 else if (_currentObjectsCount < capacity)
                 {
-                    AutoGrowQueue();
+                    GrowQueue();
                 }
                 else
                 {
-                    EzLogger.Error(
+                    Debug.LogError(
                         $"Pool out of objects, no more game objects available in the [{name}] pool.\n"
                         + "Make sure to increase the [Capacity] or tick the [Auto Grow] check-box in the inspector.\n\n",
                         this);
@@ -143,7 +143,7 @@ namespace Racer.EzPooler.Core
         }
 
         /// <summary>
-        /// Despawns an object after a delay, returning it to the pool.
+        /// Despawns an object at specified delay, returning it to the pool.
         /// </summary>
         /// <param name="poolObj">The pool object to despawn.</param>
         /// <param name="delay">The delay in seconds before despawning the object.</param>

@@ -4,13 +4,13 @@ using UnityEngine;
 namespace Racer.EzPooler.Core
 {
     /// <summary>
-    /// Represents an object that can be managed by a pool manager.
+    /// Base class for objects that can be pooled and reused.
     /// </summary>
     [DisallowMultipleComponent]
     public class PoolObject : MonoBehaviour
     {
         /// <summary>
-        /// Occurs when the object is despawned.
+        /// Event that is invoked when the object is despawned.
         /// </summary>
         public event Action OnDespawned;
 
@@ -18,7 +18,7 @@ namespace Racer.EzPooler.Core
 
 
         /// <summary>
-        /// Invokes the Despawn method after a specified delay.
+        /// Invokes <see cref="Despawn"/> at specified delay.
         /// </summary>
         /// <param name="delay">The delay in seconds before despawning the object.</param>
         public virtual void InvokeDespawn(float delay)
@@ -27,9 +27,9 @@ namespace Racer.EzPooler.Core
         }
 
         /// <summary>
-        /// Despawns the object by calling the DespawnObject method on the associated PoolManager.
+        /// Despawns the <see cref="PoolManager"/>'s object, returning it to the pool for reuse.
         /// <remarks>
-        /// Perform any cleanup operations before despawning the object by overriding this method and calling the base method as well.
+        /// Override this method to perform any necessary cleanup operations before the object is despawned.
         /// </remarks>
         /// </summary>
         public virtual void Despawn()
