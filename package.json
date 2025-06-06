@@ -1,0 +1,30 @@
+{
+  "name": "com.racer.ezpooler",
+  "displayName": "EzPooler",
+  "version": "1.0.3",
+  "unity": "2020.3",
+  "description": "Provides an efficient way to manage object pooling in your game.",
+  "documentationUrl": "https://ebukaracer.github.io/EzPooler",
+  "licensesUrl": "https://ebukaracer.github.io/ebukaracer/md/LICENSE.html",
+  "changelogUrl": "https://github.com/ebukaracer/EzPooler/tags",
+  "author": {
+    "name": "Racer",
+    "url": "https://github.com/ebukaracer"
+  },
+  "category": "Tools",
+  "keywords": [
+    "pooling",
+    "unity-package",
+    "tool",
+    "reuse",
+    "pre-instantiation",
+    "package"
+  ],
+  "samples": [
+    {
+      "displayName": "Demo",
+      "description": "An example scene containing a demo of the package.",
+      "path": "Samples~/Demo"
+    }
+  ]
+}
